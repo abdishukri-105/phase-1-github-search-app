@@ -9,7 +9,6 @@ myform.addEventListener("submit",  function(e){
     
     const userName = document.getElementById("search").value
     console.log(userName)
-    // const fullName = search.split(' ').join('')
     let usersUrl = `https://api.github.com/users/${userName}`
     let reposUrl = `https://api.github.com/users/${userName}/repos`
 
@@ -31,18 +30,17 @@ myform.addEventListener("submit",  function(e){
    // repos url 
    fetch(reposUrl).then(response => response.json())
    .then(repos => {
-    console.log(repos)
+    
 
     repos.forEach(repo => {
-      displayrepos(repo)
+       console.log(repo)
+       displayrepos(repo)
+       
     })
     
    })
-
-     
-
   
-} )
+})
 
 
 const displayUsers = (data) => {
@@ -57,11 +55,6 @@ const displayUsers = (data) => {
   const user = document.createElement("h3")
   user.textContent = data.name
 
-  // const userrepos = document.createElement("a")
-  // userrepos.href = data.repos_url
-  // userrepos.setAttribute("target", "_blank")
-  // userrepos.textContent = "user repos"
-
   const link = document.createElement("a")
   link.href = data.html_url
   link.setAttribute("target", "_blank")
@@ -70,12 +63,12 @@ const displayUsers = (data) => {
   userlist.appendChild(image)
   userlist.appendChild(user)
   userlist.appendChild(link)
+ 
 
 
  }
 
  // repo list
-
  const displayrepos = (repo) => {
 
    const repos = document.getElementById("repos-list")
@@ -84,5 +77,5 @@ const displayUsers = (data) => {
    repoName.textContent = repo.name
 
    repos.appendChild(repoName)
-
- }
+ 
+}
