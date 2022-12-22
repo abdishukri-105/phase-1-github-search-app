@@ -1,5 +1,3 @@
-
-
 // referrence the form
 const myform = document.getElementById("github-form")
 
@@ -10,7 +8,7 @@ myform.addEventListener("submit",  function(e){
 
     
     const userName = document.getElementById("search").value
-  console.log(userName)
+    console.log(userName)
     // const fullName = search.split(' ').join('')
     let usersUrl = `https://api.github.com/users/${userName}`
     let reposUrl = `https://api.github.com/users/${userName}/repos`
@@ -25,32 +23,24 @@ myform.addEventListener("submit",  function(e){
         }else{
            console.log(data)
            displayUsers(data)
-          //  const userlist = document.getElementById("user-list")
-          //  userlist.innerHTML = `
-          //  <img src = "${data.avatar_url}"
-          //  styles = "width: 100%" "height: 40%">
-          //   <a>${data.name}</a>
-          //   <a  target="_black" href="${data.html_url}">see full profile here</p>
-          //  `
-        //    data.name.addEventListener("click", () => {
-        
-         
-            // fetch(reposUrl).then((result) => result.json())
-            // .then((data) => {
-            //     console.log(data)
-            //     const repolist = document.getElementById("repos-list")
-            //    const li = document.createElement("li")
-            //    repolist.textContent = repo.name
-            //    repolist.appendChild(li)
-
-            // })
-
-        
-        }
+            }
       
    }).catch(error => console.log(error.message))
 
-   
+
+   // repos url 
+   fetch(reposUrl).then(response => response.json())
+   .then(repos => {
+    console.log(repos)
+
+    repos.forEach(repo => {
+      displayrepos(repo)
+    })
+    
+   })
+
+     
+
   
 } )
 
@@ -81,5 +71,18 @@ const displayUsers = (data) => {
   userlist.appendChild(user)
   userlist.appendChild(link)
 
+
+ }
+
+ // repo list
+
+ const displayrepos = (repo) => {
+
+   const repos = document.getElementById("repos-list")
+
+   const repoName = document.createElement("li")
+   repoName.textContent = repo.name
+
+   repos.appendChild(repoName)
 
  }
